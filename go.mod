@@ -1,4 +1,4 @@
-module github.com/dmoore1989/aoc_template
+module github.com/dmoore1989/aoc2025
 
 go 1.24.5
 

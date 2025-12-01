@@ -23,7 +23,7 @@ func Mod[T constraints.Integer](num T, mod T) T {
 		return num % mod
 	}
 
-	return (mod + (num % mod)) % 4
+	return (mod + (num % mod)) % mod
 }
 
 func Abs[T constraints.Integer](num T) T {
