@@ -32,3 +32,7 @@ func Abs[T constraints.Integer](num T) T {
 	}
 	return num
 }
+
+func InsideSlice(index, length int) bool {
+	return index >= 0 && index < length
+}
