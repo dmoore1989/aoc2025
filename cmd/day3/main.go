@@ -57,29 +57,26 @@ func part2(fileTxt string) string {
 	var total int
 	row := strings.SplitSeq(fileTxt, "\n")
 	for batteries := range row {
-		total += findLargest(batteries, 12)
-
+		nextAmount, _ := strconv.Atoi(findLargest(batteries, 12))
+		fmt.Println(nextAmount)
+		total += nextAmount
 	}
 	return strconv.Itoa(total)
 }
 
-func findLargest(amount string, num int) {
+func findLargest(amount string, num int) string {
+	if num == 1 {
+		return amount
+	}
+
 	var largest int
 	finalIdx := len(amount) - num
 	for i, test := range amount[:finalIdx] {
-		nextSequence := findLargest(amount[i:], num - 1)
-		testAmount, err :=string(test)	
-	
-	
-	
-	
-
-	 
-																		
-
-		
-		
-
-
-	return largest
+		nextSequence := findLargest(amount[i:], num-1)
+		testAmount, _ := strconv.Atoi(string(test) + nextSequence)
+		if testAmount > largest {
+			largest = testAmount
+		}
+	}
+	return strconv.Itoa(largest)
 }
