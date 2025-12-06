@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"strconv"
+
 	"golang.org/x/exp/constraints"
 )
 
@@ -35,4 +37,10 @@ func Abs[T constraints.Integer](num T) T {
 
 func InsideSlice(index, length int) bool {
 	return index >= 0 && index < length
+}
+
+// It's advent of code, I couldn't care less if my integer conversion has an error...
+func Atoi(s string) int {
+	n, _ := strconv.Atoi(s)
+	return n
 }
