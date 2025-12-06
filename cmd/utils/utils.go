@@ -20,6 +20,14 @@ var Ordinals = map[rune][2]int{
 	'E': {0, 1},
 }
 
+func ToSliceNum(s []string) []int {
+	var a []int
+	for _, n := range s {
+		a = append(a, Atoi(n))
+	}
+	return a
+}
+
 func Mod[T constraints.Integer](num T, mod T) T {
 	if num >= 0 {
 		return num % mod
