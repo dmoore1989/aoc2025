@@ -84,11 +84,57 @@ func part2(fileTxt string) string {
 			y2 := utils.Atoi(pTwo[1])
 
 			area := (utils.Abs(x2-x1) + 1) * (utils.Abs(y2-y1) + 1)
-			if area > maxArea {
+			if area > maxArea && rectInShape(x1, y1, x2, y2, &lightShape) {
 				maxArea = area
 			}
 		}
 	}
 
 	return strconv.Itoa(maxArea)
+}
+
+func rectInShape(x1, y1, x2, y2 int, shape *polygon.Shape) bool {
+	var minX, maxX int
+	if x1 > x2 {
+		maxX = x1
+		minX = x2
+	} else {
+		maxX = x2
+		minX = x1
+	}
+	for i := minX; i <= maxX; i++ {
+		point := polygon.Point{X: float64(i), Y: float64(y1)}
+		fmt.Println("first", point, shape)
+		if !point.Inside(shape) {
+			return false
+		}
+
+		fmt.Println("next", point)
+		point = polygon.Point{X: float64(i), Y: float64(y2)}
+		if !point.Inside(shape) {
+			return false
+		}
+	}
+
+	var minY, maxY int
+	if y1 > y2 {
+		maxY = y1
+		minY = y2
+	} else {
+		maxY = y2
+		minY = y1
+	}
+	for i := minY; i <= maxY; i++ {
+		point := polygon.Point{X: float64(x1), Y: float64(i)}
+		if !point.Inside(shape) {
+			return false
+		}
+
+		point = polygon.Point{X: float64(x2), Y: float64(i)}
+		if !point.Inside(shape) {
+			return false
+		}
+	}
+
+	return true
 }
